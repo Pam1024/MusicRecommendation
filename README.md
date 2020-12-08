@@ -10,7 +10,7 @@ The structure of dataframe which is used in the recommendation shows as below:
 
 ## Popularity-base Recommendation
 Using a top list for recommendation for new user, because those users don't have listened record so that can't apply collabrative filtering on recommendation for them.
-''' python
+``` python
 # recommend by popularity for new user who doesn't have listening record
 def popularity_recommendation(data, user_id, item_id,recommend_num):
     # based on the item_id, get the popular items
@@ -22,4 +22,4 @@ def popularity_recommendation(data, user_id, item_id,recommend_num):
     # create rank
     popular['rank'] = popular['score'].rank(ascending=0, method='first')
     return popular.set_index('rank').head(recommend_num)
-  '''
+```
