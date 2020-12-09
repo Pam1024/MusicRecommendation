@@ -2,7 +2,7 @@
 
 This music recommendation task concentrates on two different ways for recommendation:
 1. **Popularity-based**, which is used for new user who didn't have music listened record 
-2. **Item-based collabrative filtering**, which is used for regular user who has music listened record
+2. **Item-based collabrative filtering**, which is used for regular user who has music listened record. This approach uses Jaccard similarity coefficient  
 
 ## Data Exploration
 This instruction focuses on how to make recommendation, for the topic that how to explore data please refer to the code file.
@@ -26,5 +26,10 @@ def popularity_recommendation(data, user_id, item_id,recommend_num):
 user_id : the column name of user, it's 'user'  
 item_id : can be the column name of the song, artist, or a release, it depends on what you want to recommend.  
 recommend_num : how many items you want to recommend to the user, for example like 10 or 100  
+
 First, find out the the popularity based on the item_id, so that we have the popular ordered list. And then we select the top recommend_num items from the list and recommend to the user.  
+
+## Item-based collabrative filtering
+For a regular user, we can have data of what song he has listened. Based on Jaccard similarity coefficient, we can calculate the average similarity between a specific song and all songs the user listened.
+
 
