@@ -23,8 +23,8 @@ def popularity_recommendation(data, user_id, item_id,recommend_num):
     popular['rank'] = popular['score'].rank(ascending=0, method='first')
     return popular.set_index('rank').head(recommend_num)
 ```
-user_id : the column name of user, it's 'user'/n
-item_id : can be the column name of the song, artist, or a release, it depends on what you want to recommend./n
-recommend_num : how many items you want to recommend to the user, for example like 10 or 100
-First, find out the the popularity based on the item_id, so that we have the popular ordered list. And then we select the top recommend_num items from the list and recommend to the user.
+user_id : the column name of user, it's 'user'  
+item_id : can be the column name of the song, artist, or a release, it depends on what you want to recommend.  
+recommend_num : how many items you want to recommend to the user, for example like 10 or 100  
+First, find out the the popularity based on the item_id, so that we have the popular ordered list. And then we select the top recommend_num items from the list and recommend to the user.  
 
