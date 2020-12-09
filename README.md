@@ -96,3 +96,6 @@ From construct_cooccurence_matrix function, we construct the matrix for calculat
         else:
             return df
   ```
+As we already have the Jaccard coefficient matrix, we can calculate the average coefficient value between the song we consider reommend and the songs the user listend. Like for song X, we sum all the value in column X, then we divided this value by the number of how many songs the user listend, it's matrix.sum(col(X))/matrix.shape[0]
+
+And then we sorted all the average values, and get the top similar list from the data.
