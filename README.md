@@ -9,7 +9,7 @@ This instruction focuses on how to make recommendation, for the topic that how t
 The structure of dataframe which is used in the recommendation shows as below:
 
 ## Popularity-base Recommendation
-Using a top list for recommendation for new user, because those users don't have listened record so that can't apply collabrative filtering on recommendation for them.
+Using a top popular list for recommendation for new user, because those users don't have listened record so that can't apply collabrative filtering on recommendation for them.
 ``` python
 # recommend by popularity for new user who doesn't have listening record
 def popularity_recommendation(data, user_id, item_id,recommend_num):
@@ -33,11 +33,12 @@ First, find out the the popularity based on the item_id, so that we have the pop
 For a regular user, we can have data of what song he has listened. Based on Jaccard similarity coefficient, we can calculate the average similarity between a specific song and all songs the user listened.
 
 For example, we have song A and song B, the Jaccard similarity coefficient is calculated like this:
-1. get the the amount of users who listened both song A and Song X, which is A∩X
-2. get the union of amount of users who listened to song A and amount of users who listened to song X , which is A∪X
-3. Jaccard similarity coefficient between A and B is equal to : (A∩X)/(A∪X)
+1. get the the amount of users who listened both song A and Song B, which is A∩B
+2. get the union of amount of users who listened to song A and amount of users who listened to song B , which is A∪B
+3. Jaccard similarity coefficient between A and B is equal to : (A∩B/(A∪B)
 
-If the user whom we want to recommend to has listened 3 songs: A,B,C. And we want to know should we recommend song X to the user. We need to calculate the Jaccard similarity coefficient between each song the user listened with song X. so we get 3 Jaccard similarity coefficient， J(A), J(B), J(C), and we get the average of them J(X) = (J(A) + J(B) +J(C))/3.
+
+If the user whom we want to recommend to has listened 3 songs: A,B,C. And we want to know whether we recommend song X to the user. We need to calculate the Jaccard similarity coefficient between each song the user listened with song X. so we get 3 Jaccard similarity coefficients， J(A), J(B), J(C), and we get the average of them J(X) = (J(A) + J(B) +J(C))/3.
 
 When there is another song Y we consider whether recommend, we calculate J(Y) as above. Then we compare J(X) and J(Y)， whose value is larger, who is more highly reommended.  
 
@@ -69,7 +70,7 @@ def construct_cooccurence_matrix(self, user_items, all_items):
                     self.cooccurence_matrix[i][j] = 0
         return self.cooccurence_matrix
   ```
-From construct_cooccurence_matrix function, we construct the matrix for calculation of Jaccard coefficient between songs. like if the user whom we want to make recommendation to has listened 3 songs, and 5 other songs we consider whether recommend. Then this matrix will be 3*5, each row means a song the user listened, each column means a song we consider whether recommend.
+From construct_cooccurence_matrix function, we construct the matrix for calculation of Jaccard coefficient between songs. Like if the user whom we want to make recommendation to has listened 3 songs, and 5 other songs we consider whether recommend. Then this matrix will be 3*5, each row means a song the user listened, each column means a song we consider whether recommend.
 
 ```python
 # use cooccurence matrix to make top recommendation
@@ -96,6 +97,6 @@ From construct_cooccurence_matrix function, we construct the matrix for calculat
         else:
             return df
   ```
-As we already have the Jaccard coefficient matrix, we can calculate the average coefficient value between the song we consider reommend and the songs the user listend. Like for song X, we sum all the value in column X, then we divided this value by the number of how many songs the user listend, it's matrix.sum(col(X))/matrix.shape[0]
+As we already have the Jaccard coefficient matrix, we can calculate the average coefficient value between the song we consider reommend and the songs the user listend. Like for song X considering recommend, we sum all the values in column X, then we divided this value by the number of how many songs the user listend, it's matrix.sum(col(X))/matrix.shape[0]
 
-And then we sorted all the average values, and get the top similar list from the data.
+And then we sorted all the average values, and get the top similar list from the data. And that's what we recommend to the user.
