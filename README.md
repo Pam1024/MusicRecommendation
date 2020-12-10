@@ -2,7 +2,7 @@
 
 This music recommendation task concentrates on two different ways for recommendation:
 1. **Popularity-based**, which is used for new user who didn't have music listened record 
-2. **Item-based collabrative filtering**, which is used for regular user who has music listened record. This approach uses Jaccard similarity coefficient  
+2. **Item-based Collaborative  filtering**, which is used for regular user who has music listened record. This approach uses Jaccard similarity coefficient  
 
 ## Data Exploration
 This instruction focuses on how to make recommendation, for the topic that how to explore data please refer to the code file.
@@ -10,7 +10,7 @@ The structure of dataframe which is used in the recommendation shows as below:
 ![dataframe](https://github.com/Pam1024/MusicRecommendation/blob/main/music_recommendation_image/data_frame.PNG) 
 
 ## Popularity-base Recommendation
-Using a top popular list for recommendation for new user, because those users don't have listened record so that can't apply collabrative filtering on recommendation for them.
+Using a top popular list for recommendation for new user, because those users don't have listened record so that can't apply Collaborative filtering on recommendation for them.
 ``` python
 # recommend by popularity for new user who doesn't have listening record
 def popularity_recommendation(data, user_id, item_id,recommend_num):
@@ -48,7 +48,7 @@ popularity_recommendation(train_data,'user','artist_name',20)
 ```
 ![popularity_artist_recommend](https://github.com/Pam1024/MusicRecommendation/blob/main/music_recommendation_image/popularity_artist_recommend.PNG) 
 
-## Item-based collabrative filtering
+## Item-based Collaborative  filtering
 For a regular user, we can have data of what song he has listened. Based on Jaccard similarity coefficient, we can calculate the average similarity between a specific song and all songs the user listened.
 
 For example, we have song A and song B, the Jaccard similarity coefficient is calculated like this:
