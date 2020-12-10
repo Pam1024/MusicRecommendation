@@ -7,6 +7,7 @@ This music recommendation task concentrates on two different ways for recommenda
 ## Data Exploration
 This instruction focuses on how to make recommendation, for the topic that how to explore data please refer to the code file.
 The structure of dataframe which is used in the recommendation shows as below:
+![dataframe](https://github.com/Pam1024/MusicRecommendation/blob/main/music_recommendation_image/data_frame.PNG) 
 
 ## Popularity-base Recommendation
 Using a top popular list for recommendation for new user, because those users don't have listened record so that can't apply collabrative filtering on recommendation for them.
@@ -29,6 +30,24 @@ recommend_num : how many items you want to recommend to the user, for example li
 
 First, find out the the popularity based on the item_id, so that we have the popular ordered list. And then we select the top recommend_num items from the list and recommend to the user.  
 
+```python
+# recommend songs
+popularity_recommendation(train_data,'user','title',20)
+```
+![popularity_song_recommend](https://github.com/Pam1024/MusicRecommendation/blob/main/music_recommendation_image/popularity_song_recommend.PNG) 
+
+```python
+# recommend releases
+popularity_recommendation(train_data,'user','release',10)
+```
+![popularity_release_recommend](https://github.com/Pam1024/MusicRecommendation/blob/main/music_recommendation_image/popularity_release_recommend.PNG) 
+
+```python
+# recommend artists
+popularity_recommendation(train_data,'user','artist_name',20)
+```
+![popularity_artist_recommend](https://github.com/Pam1024/MusicRecommendation/blob/main/music_recommendation_image/popularity_artist_recommend.PNG) 
+
 ## Item-based collabrative filtering
 For a regular user, we can have data of what song he has listened. Based on Jaccard similarity coefficient, we can calculate the average similarity between a specific song and all songs the user listened.
 
@@ -37,6 +56,7 @@ For example, we have song A and song B, the Jaccard similarity coefficient is ca
 2. get the union of amount of users who listened to song A and amount of users who listened to song B , which is A∪B
 3. Jaccard similarity coefficient between A and B is equal to : (A∩B/(A∪B)
 
+![jaccard equation](https://github.com/Pam1024/MusicRecommendation/blob/main/music_recommendation_image/jaccard.PNG) 
 
 If the user whom we want to recommend to has listened 3 songs: A,B,C. And we want to know whether we recommend song X to the user. We need to calculate the Jaccard similarity coefficient between each song the user listened with song X. so we get 3 Jaccard similarity coefficients， J(A), J(B), J(C), and we get the average of them J(X) = (J(A) + J(B) +J(C))/3.
 
@@ -100,3 +120,4 @@ From construct_cooccurence_matrix function, we construct the matrix for calculat
 As we already have the Jaccard coefficient matrix, we can calculate the average coefficient value between the song we consider reommend and the songs the user listend. Like for song X considering recommend, we sum all the values in column X, then we divided this value by the number of how many songs the user listend, it's matrix.sum(col(X))/matrix.shape[0]
 
 And then we sorted all the average values, and get the top similar list from the data. And that's what we recommend to the user.
+![CF](https://github.com/Pam1024/MusicRecommendation/blob/main/music_recommendation_image/item_based%20collarative%20filtering.PNG)
